@@ -1,0 +1,75 @@
+<template>
+    <div class="movie-card" @mouseenter="showDescription" @mouseleave="hideDescription">
+      <img :src="getImageUrl(movie.poster_path)" :alt="movie.original_title" />
+      <div class="description" :class="{ 'show': showDesc }">{{ movie.overview }}</div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: {
+      movie: Object,
+    },
+    data() {
+      return {
+        showDesc: false,
+        timeoutID: null,
+      };
+    },
+    methods: {
+      getImageUrl(path) {
+        return `https://image.tmdb.org/t/p/w500/${path}`;
+      },
+      showDescription() {
+        this.timeoutID = setTimeout(() => {
+          this.showDesc = true;
+        }, 1000);
+      },
+      hideDescription() {
+        if (this.timeoutID) {
+          clearTimeout(this.timeoutID);
+          this.timeoutID = null;
+        }
+        this.showDesc = false;
+      },
+    },
+  };
+  </script>
+  
+  <style scoped>
+  .movie-card {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .movie-card .description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: justify;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .movie-card .description.show {
+    transform: translateY(0%);
+  }
+  </style>
+  
