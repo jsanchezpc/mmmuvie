@@ -18,7 +18,11 @@
     },
     methods: {
       getImageUrl(path) {
-        return `https://image.tmdb.org/t/p/w500/${path}`;
+        if (path === null) {
+          return 'https://via.placeholder.com/500x750';
+        } else {
+          return `https://image.tmdb.org/t/p/w500/${path}`;
+        }
       },
       showDescription() {
         this.timeoutID = setTimeout(() => {

@@ -1,18 +1,15 @@
-//centrar peliculas del carrusel
-
 <template>
   <div class="movies-carousel">
-    <swiper-core :options="swiperOptions">
-      <swiper-slide v-for="movie in movies" :key="movie.id">
+    <swiper :slides-per-view="3" speed="3000" :space-between="1" :options="swiperOptions">
+      <SwiperSlide v-for="movie in movies" :key="movie.id">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
-      </swiper-slide>
-    </swiper-core>
+      </SwiperSlide>
+    </swiper>
   </div>
-  
 </template>
   
 <script>
-import { SwiperSlide } from 'swiper/vue';
+import { SwiperSlide, Swiper } from 'swiper/vue';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper/core';
 import 'swiper/swiper-bundle.css';
 import axios from 'axios';
@@ -22,15 +19,14 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 export default {
 
   components: {
-    SwiperSlide,
-    SwiperCore: SwiperCore.component // using SwiperCore as a component
+    SwiperSlide, // using SwiperCore as a component
+    Swiper
   },
   data() {
     return {
       movies: [],
+      modules: [Navigation, Pagination, Autoplay],
       swiperOptions: {
-        slidesPerView: 3,
-        spaceBetween: 30,
         navigation: true,
         pagination: {
           clickable: true,
@@ -67,6 +63,7 @@ export default {
 .swiper-slide {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 

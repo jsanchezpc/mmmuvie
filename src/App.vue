@@ -6,8 +6,8 @@
       <div class="movie-container">
         <MovieCard v-for="movie in searchResults" :key="movie.id" :movie="movie"></MovieCard>
       </div>
+      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :changePage="changePage" />
     </div>
-    <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" @changePage="changePage" />
   </div>
 </template>
 
@@ -82,9 +82,6 @@ export default {
 }
 
 
-div.search-results {
-  background-color: #A4B787;
-}
 
 
 </style>
