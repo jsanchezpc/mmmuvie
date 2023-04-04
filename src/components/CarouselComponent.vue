@@ -1,3 +1,5 @@
+//centrar peliculas del carrusel
+
 <template>
   <div class="movies-carousel">
     <swiper-core :options="swiperOptions">
