@@ -6,7 +6,7 @@
       <div class="movie-container">
         <MovieCard v-for="movie in searchResults" :key="movie.id" :movie="movie"></MovieCard>
       </div>
-      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :changePage="changePage" />
+      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :onChangePage="changePage" />
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
     // Llamada a la API al cargar el componente - carrusel,
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&page=1`)
       .then(response => {
+        console.log(response.data)
         this.popularMovies = response.data.results;
       })
       .catch(error => {
@@ -51,12 +52,16 @@ export default {
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&query=${this.query}&page=1&include_adult=false`)
         .then(response => {
           console.log('has buscado: ' + this.query)
+          this.totalPages = response.data.total_pages;
+          this.currentPage = response.data.page;
           this.searchResults = response.data.results;
-          console.log(this.searchResults);
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    onChangePage(pageNumber) {
+      this.currentPage = pageNumber;
     }
   }
 }
@@ -80,8 +85,4 @@ export default {
 
   border-radius: 3.5px 3.5px 3.5px 3.5px;
 }
-
-
-
-
 </style>

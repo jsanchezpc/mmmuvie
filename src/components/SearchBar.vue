@@ -1,6 +1,6 @@
 <template>
     <div class="search-bar">
-        <input type="text" v-model="value" @input="search" placeholder="Search movies..." />
+        <input type="text" v-model="value" @input="search" placeholder="Search" />
     </div>
 </template>
   
@@ -15,6 +15,7 @@ export default {
     watch: {
         searchQuery(newVal) {
             this.$emit('search', newVal);
+            this.value = '';
         }
     },
     methods: {
@@ -34,10 +35,22 @@ export default {
 }
 
 .search-bar input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 500px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  max-width: 500px;
+  font-size: 2em;
+  text-align: center;
 }
+
+.search-bar input:focus {
+  width: 100%;
+  max-width: none;
+}
+
+
+
+
 </style>

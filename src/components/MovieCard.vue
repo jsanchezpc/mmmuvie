@@ -1,5 +1,6 @@
 <template>
     <div class="movie-card" @mouseenter="showDescription" @mouseleave="hideDescription">
+      <h3 class="movie-title">{{ movie.original_title }}</h3>
       <img :src="getImageUrl(movie.poster_path)" :alt="movie.original_title" />
       <div class="description" :class="{ 'show': showDesc }">{{ movie.overview }}</div>
     </div>
@@ -43,11 +44,28 @@
   <style scoped>
   .movie-card {
     position: relative;
-    width: 200px;
-    height: 300px;
+    width: 400px;
+    height: 600px;
     margin: 1rem;
     cursor: pointer;
     overflow: hidden;
+  }
+
+  .movie-title {
+    position: absolute;
+    border-radius: 2px 2px 0 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    text-align: center;
+    transform: translateY(-40%);
+    transition: transform 0.3s ease-in-out;
   }
   
   .movie-card img {
@@ -65,11 +83,12 @@
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 1.2;
     text-align: justify;
     transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
+    overflow: hidden;
   }
   
   .movie-card .description.show {
