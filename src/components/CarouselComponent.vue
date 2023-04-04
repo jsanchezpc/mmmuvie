@@ -1,6 +1,6 @@
 <template>
   <div class="movies-carousel">
-    <swiper :breakpoints="{ 700:{ slidesPerView:1 }, 1000:{ slidesPerView:2 }, 1350: { slidesPerView: 4} }" :slides-per-view="1" :speed=1000 :space-between="1" :options="swiperOptions">
+    <swiper :breakpoints="{ 700:{ slidesPerView:1 }, 1221:{ slidesPerView:3 }, 1641: { slidesPerView: 4} }" :slides-per-view="1" :speed=1000 :space-between="1" :options="swiperOptions">
       <SwiperSlide v-for="movie in movies" :key="movie.id">
         <div class="movie-container">
           <MovieCard :key="movie.id" :movie="movie"></MovieCard>
