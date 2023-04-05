@@ -2,21 +2,21 @@
   <nav v-if="isMounted">
     <ul class="pagination">
       <li :class="{ disabled: page === 1 }">
-        <a @click="changePage(currentPage - 1)" href="#" aria-label="Previous">
+        <a @click="onChangePage(currentPage - 1)" href="#" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
       <li v-for="pageNumber in showPages" :key="pageNumber" :class="{ active: currentPage === pageNumber }">
-        <a @click="changePage(pageNumber)" href="#">{{ pageNumber }}</a>
+        <a @click="onChangePage(pageNumber)" href="#">{{ pageNumber }}</a>
       </li>
       <li v-if="showPages[showPages.length - 1] !== totalPages - 1">
         <span>...</span>
       </li>
       <li v-if="showPages[showPages.length - 1] !== totalPages" :key="totalPages">
-        <a @click="changePage(totalPages)" href="#">{{ totalPages }}</a>
+        <a @click="onChangePage(totalPages)" href="#">{{ totalPages }}</a>
       </li>
       <li :class="{ disabled: currentPage === totalPages }">
-        <a @click="changePage(currentPage + 1)" href="#" aria-label="Next">
+        <a @click="onChangePage(currentPage + 1)" href="#" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -48,15 +48,15 @@ export default {
   },
   mounted() {
     this.isMounted = true;
-    this.updateShowPages();
+    this.changePage();
   },
   watch: {
     currentPage() {
-      this.updateShowPages();
+      this.changePage();
     }
   },
   methods: {
-    updateShowPages() {
+    changePage() {
       const pages = [];
       let startPage = Math.max(1, this.currentPage - 5);
       let endPage = Math.min(this.totalPages, this.currentPage + 5);
@@ -94,11 +94,13 @@ export default {
 .pagination>li>span {
   position: relative;
   float: left;
-  padding: 6px 12px;
+  padding: 20px 20px;
   margin-left: -1px;
   line-height: 1.42857143;
   color: #337ab7;
   text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
   background-color: #fff;
   border: 1px solid #ddd;
 }

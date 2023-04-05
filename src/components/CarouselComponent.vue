@@ -1,5 +1,6 @@
 <template>
   <div class="movies-carousel">
+    <h1 class="carousel-title">Películas populares</h1>
     <swiper :breakpoints="{ 700:{ slidesPerView:1 }, 1221:{ slidesPerView:3 }, 1641: { slidesPerView: 4} }" :slides-per-view="1" :speed=1000 :space-between="1" :options="swiperOptions">
       <SwiperSlide v-for="movie in movies" :key="movie.id">
         <div class="movie-container">
@@ -55,17 +56,29 @@ export default {
 </script>
   
 <style scoped>
+
+.carousel-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+
 .movies-carousel {
+  margin-top: 50px;
+
   border-top-style: solid;
   border-top-width: 18px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border-top-color: rgb(0, 0, 0);
+  border-top-color: rgba(0, 0, 0, 0.3);
   border-bottom-style: solid;
   border-bottom-width: 18px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  border-bottom-color: rgb(0, 0, 0);
+  border-bottom-color: rgb(0, 0, 0, 0.35);
 
   border-right-style: solid;
   border-right-width: 2px;

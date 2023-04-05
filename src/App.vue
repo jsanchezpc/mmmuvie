@@ -1,12 +1,13 @@
 <template>
   <div>
-    <SearchBar v-model="query" @search="searchMovies" />
     <CarouselComponent />
+    <hr>
+    <SearchBar v-model="query" @search="searchMovies" />
     <div class="search-results movie-container" v-if="searchResults.length > 0">
       <div class="movie-container">
         <MovieCard v-for="movie in searchResults" :key="movie.id" :movie="movie"></MovieCard>
       </div>
-      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :onChangePage="changePage" />
+      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" @onChangePage="onChangePage(currentPage)" />
     </div>
   </div>
 </template>
@@ -49,7 +50,7 @@ export default {
   },
   methods: {
     searchMovies() {
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&query=${this.query}&page=1&include_adult=false`)
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&query=${this.query}&${this.currentPage}=1&include_adult=false`)
         .then(response => {
           console.log('has buscado: ' + this.query)
           this.totalPages = response.data.total_pages;
@@ -68,6 +69,13 @@ export default {
 </script>
 
 <style scoped>
+
+hr {
+  margin: 2rem 0;
+  border: 1px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+}
 .movie-container {
   display: flex;
   flex-wrap: wrap;

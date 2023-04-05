@@ -53,7 +53,7 @@
 
   .movie-title {
     position: absolute;
-    border-radius: 2px 2px 0 0;
+    border-radius: 3.5px 3.5px 0 0;
     top: 0;
     left: 0;
     width: 100%;
