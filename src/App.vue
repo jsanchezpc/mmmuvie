@@ -1,5 +1,5 @@
 <template>
-  <TopMenu :username="jorge" />
+  <TopMenu :username="'jorge'" />
   <div>
     <CarouselComponent />
     <hr>
@@ -12,6 +12,7 @@
       <PaginationComponent :totalPages="totalPages" :currentPage="currentPage"
         :onChangePage="page => searchMovies(page)" />
     </div>
+    <hr>
   </div>
   <BottomFooter />
 </template>
