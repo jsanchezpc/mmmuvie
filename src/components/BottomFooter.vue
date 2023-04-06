@@ -1,7 +1,7 @@
 <template>
     <footer class="bottom-footer">
-      <div class="container">
-        <p>&copy; {{ currentYear }} Mmmuvie, colabora y forma una comunidad sana.</p>
+      <div class="bottom-footer">
+        <p >&copy; {{ currentYear }} Mmmuvie, colabora y forma una comunidad sana.</p>
       </div>
     </footer>
   </template>
@@ -23,6 +23,9 @@
     text-align: center;
     color: white;
     font-size: 1.6em;
+    position: relative;
+    bottom: 0;
+    height: 1200px;
   }
   </style>
   

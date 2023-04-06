@@ -2,7 +2,7 @@
     <header class="navbar">
       <h1 class="navbar__title" style="text-align: center;">mmmuvie</h1>
       <div class="navbar__user">
-        <span>{{ username }}</span>
+        <span id="nav-username">Jorge</span>
         <button class="navbar__toggle" @click="toggleMenu">
           <i class="fas fa-bars"></i>
         </button>
@@ -38,6 +38,10 @@
   </script>
   
   <style scoped>
+
+  #nav-username {
+    font-size: 2.5em;
+  }
   .navbar {
     z-index: 1;
     display: flex;

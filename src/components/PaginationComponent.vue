@@ -94,7 +94,7 @@ export default {
 .pagination>li>span {
   position: relative;
   float: left;
-  padding: 20px 20px;
+  padding: 40px 40px;
   margin-left: -1px;
   line-height: 1.42857143;
   color: #337ab7;

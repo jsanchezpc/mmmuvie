@@ -5,13 +5,12 @@
     <hr>
     <SearchBar v-model="query" @search="searchMovies" />
     <div class="search-results movie-container" v-if="searchResults.length > 0">
+      <h2 id="title-results">Resultados de la búsqueda</h2>
       <div class="movie-container">
         <MovieCard v-for="movie in searchResults" :key="movie.id" :movie="movie"></MovieCard>
       </div>
-      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :onChangePage="page => searchMovies(page)" />
-
-
-
+      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage"
+        :onChangePage="page => searchMovies(page)" />
     </div>
   </div>
   <BottomFooter />
@@ -80,6 +79,12 @@ export default {
 </script>
 
 <style scoped>
+#title-results {
+  text-align: center;
+  font-size: 2.5em;
+  margin: 2rem 0;
+}
+
 hr {
   margin: 2rem 0;
   border: 1px;
