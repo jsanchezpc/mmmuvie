@@ -1,4 +1,5 @@
 <template>
+  <TopMenu :username="jorge" />
   <div>
     <CarouselComponent />
     <hr>
@@ -7,14 +8,20 @@
       <div class="movie-container">
         <MovieCard v-for="movie in searchResults" :key="movie.id" :movie="movie"></MovieCard>
       </div>
-      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" @onChangePage="onChangePage(currentPage)" />
+      <PaginationComponent :totalPages="totalPages" :currentPage="currentPage" :onChangePage="page => searchMovies(page)" />
+
+
+
     </div>
   </div>
+  <BottomFooter />
 </template>
 
 <script>
 import axios from 'axios';
 //components
+import TopMenu from './components/TopMenu.vue';
+import BottomFooter from './components/BottomFooter.vue';
 import MovieCard from './components/MovieCard.vue';
 import SearchBar from './components/SearchBar.vue';
 import PaginationComponent from './components/PaginationComponent.vue';
@@ -25,7 +32,9 @@ export default {
     MovieCard,
     SearchBar,
     PaginationComponent,
-    CarouselComponent // added here
+    CarouselComponent,
+    TopMenu,
+    BottomFooter
   },
   data() {
     return {
@@ -39,7 +48,7 @@ export default {
 
   mounted() {
     // Llamada a la API al cargar el componente - carrusel,
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&page=1`)
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&page=${this.currentPage}`)
       .then(response => {
         console.log(response.data)
         this.popularMovies = response.data.results;
@@ -49,8 +58,8 @@ export default {
       });
   },
   methods: {
-    searchMovies() {
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&query=${this.query}&${this.currentPage}=1&include_adult=false`)
+    searchMovies(page = 1) {
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_API_KEY}&language=es-ES&query=${this.query}&page=${page}&include_adult=false`)
         .then(response => {
           console.log('has buscado: ' + this.query)
           this.totalPages = response.data.total_pages;
@@ -60,27 +69,31 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    },
-    onChangePage(pageNumber) {
-      this.currentPage = pageNumber;
+    }
+    ,
+    onChangePage(page) {
+      this.currentPage = page;
+      this.searchMovies();
     }
   }
 }
 </script>
 
 <style scoped>
-
 hr {
   margin: 2rem 0;
   border: 1px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 
 }
+
 .movie-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 2rem;
+  display: inlijne-block;
+  justify-content: center;
 }
 
 .movie-card {

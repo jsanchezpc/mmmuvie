@@ -38,7 +38,7 @@ export default {
   padding: 0.5rem;
   border-radius: 4px;
   width: 800px;
-  height: 80px;
+  height: 100px;
   max-width: 500px;
   font-size: 2em;
   text-align: center;
@@ -49,8 +49,10 @@ export default {
 
 .search-bar input:focus {
   width: 100%;
+  font-size: 3em;
   max-width: none;
   border-radius: 7px 7px 7px 7px;
+  transition: all 2s ease-in-out;
 }
 
 .search-bar input:not(:focus) {
@@ -62,7 +64,7 @@ export default {
   font-size: 2em;
   text-align: center;
   outline: none;
-  transition: all 0.11s ease-in-out;
+  transition: all 0.5s ease-in-out;
   border-radius: 100px 100px 100px 100px;
 }
 

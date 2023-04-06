@@ -67,7 +67,7 @@ export default {
 
 
 .movies-carousel {
-  margin-top: 50px;
+  margin-top:114px;
 
   border-top-style: solid;
   border-top-width: 18px;
@@ -101,6 +101,7 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
+
 
 
 .swiper-wrapper {

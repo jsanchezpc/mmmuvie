@@ -1,18 +1,18 @@
 <template>
-  <nav v-if="isMounted">
+  <nav v-if="totalPages > 1">
     <ul class="pagination">
-      <li :class="{ disabled: page === 1 }">
+      <li :class="{ disabled: currentPage === 1 }">
         <a @click="onChangePage(currentPage - 1)" href="#" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li v-for="pageNumber in showPages" :key="pageNumber" :class="{ active: currentPage === pageNumber }">
+      <li v-for="(pageNumber, index) in totalPagesArray" :key="index" :class="{ active: currentPage === pageNumber }">
         <a @click="onChangePage(pageNumber)" href="#">{{ pageNumber }}</a>
       </li>
-      <li v-if="showPages[showPages.length - 1] !== totalPages - 1">
+      <li v-if="totalPagesArray[totalPagesArray.length - 1] < totalPages - 1">
         <span>...</span>
       </li>
-      <li v-if="showPages[showPages.length - 1] !== totalPages" :key="totalPages">
+      <li v-if="totalPagesArray[totalPagesArray.length - 1] < totalPages" :key="totalPages">
         <a @click="onChangePage(totalPages)" href="#">{{ totalPages }}</a>
       </li>
       <li :class="{ disabled: currentPage === totalPages }">
@@ -42,40 +42,40 @@ export default {
   },
   data() {
     return {
-      isMounted: false,
-      showPages: []
+      totalPagesArray: []
     }
   },
   mounted() {
-    this.isMounted = true;
     this.changePage();
   },
   watch: {
     currentPage() {
       this.changePage();
+    },
+    totalPages() {
+      this.changePage();
     }
   },
   methods: {
     changePage() {
-      const pages = [];
-      let startPage = Math.max(1, this.currentPage - 5);
-      let endPage = Math.min(this.totalPages, this.currentPage + 5);
-      if (startPage <= 10) {
-        endPage = Math.min(this.totalPages, 20);
-      } else if (endPage >= this.totalPages - 10) {
-        startPage = Math.max(1, this.totalPages - 19);
-      } else {
-        pages.push(startPage - 1);
-        endPage++;
+      let startPage = Math.max(1, this.currentPage - 4);
+      let endPage = Math.min(this.totalPages, this.currentPage + 4);
+
+      if (endPage === this.totalPages) {
+        startPage = Math.max(1, this.totalPages - 8);
       }
+
+      this.totalPagesArray = [];
+
       for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
+        this.totalPagesArray.push(i);
       }
-      this.showPages = pages;
     }
   }
+
 }
 </script>
+
 
   
 <style>
@@ -142,5 +142,27 @@ export default {
   background-color: #fff;
   border-color: #ddd;
 }
+
+.pagination .ellipsis {
+  padding: 20px 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #337ab7;
+}
+
+@media (max-width: 576px) {
+
+  .pagination>li>a,
+  .pagination>li>span {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .pagination .ellipsis {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
 </style>
+
   
