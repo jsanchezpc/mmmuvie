@@ -50,6 +50,7 @@ export default {
   margin: 1rem;
   cursor: pointer;
   overflow: hidden;
+  border: 10px ridge rgba(0, 0, 0, 0.253);
 }
 
 .movie-title {
@@ -74,11 +75,14 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 1s ease-in-out;
+  transform: scale(1.05);
+  filter: grayscale(50%);
 }
 
 .movie-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1);
+  filter: grayscale(0%);
 }
 
 .movie-card .description {
@@ -88,7 +92,7 @@ export default {
   width: 100%;
   padding: 1rem;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
   font-size: 1.5rem;
   line-height: 1.2;
@@ -101,5 +105,4 @@ export default {
 .movie-card .description.show {
   transform: translateY(0%);
 }
-
 </style>
